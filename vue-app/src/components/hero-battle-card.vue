@@ -3,7 +3,7 @@ import { Hero } from '@/store/modules/models';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'HeroTrumpCard',
+  name: 'HeroBattleCard',
   props: {
     hero: {
       type: Hero,

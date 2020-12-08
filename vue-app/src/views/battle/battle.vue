@@ -2,6 +2,8 @@
 import { computed, defineComponent, onMounted, reactive, toRefs } from 'vue';
 
 import ListHeader from '@/components/list-header.vue';
+import HeroBattleCard from '@/components/hero-battle-card.vue';
+import VillainBattleCard from '@/components/villain-battle-card.vue';
 import { useVillains } from '../villains/use-villains';
 import { useHeroes } from '../heroes/use-heroes';
 import { Villain, Hero } from '../../store/modules/models';
@@ -16,6 +18,9 @@ interface ComponentState {
   title: string;
   villains: Villain[];
   heroes: Hero[];
+  selectedVillain: Villain | null;
+  selectedHero: Hero | null;
+  showBattle: boolean;
 }
 
 export default defineComponent({
@@ -29,6 +34,8 @@ export default defineComponent({
   },
   components: {
     ListHeader,
+    HeroBattleCard,
+    VillainBattleCard,
   },
   setup() {
     const { getVillainsAction } = useVillains();
@@ -41,6 +48,9 @@ export default defineComponent({
       title: 'Battle',
       villains: computed(() => store.getters.villains as Villain[]),
       heroes: computed(() => store.getters.heroes as Hero[]),
+      selectedHero: null,
+      selectedVillain: null,
+      showBattle: false,
     });
 
     onMounted(async () => {
@@ -48,6 +58,23 @@ export default defineComponent({
       getVillains();
       console.log(state);
     });
+
+    function startBattle() {
+      console.log('Hello');
+      selectHero();
+      selectVillain();
+      state.showBattle = true;
+    }
+
+    function selectHero() {
+      const selectedIndex = 0;
+      state.selectedHero = state.heroes[selectedIndex];
+    }
+
+    function selectVillain() {
+      const selectedIndex = 0;
+      state.selectedVillain = state.villains[selectedIndex];
+    }
 
     async function getVillains() {
       state.errorMessage = '';
@@ -73,6 +100,9 @@ export default defineComponent({
       ...toRefs(state),
       getVillains,
       getHeroes,
+      startBattle,
+      selectHero,
+      selectVillain,
     };
   },
 });
@@ -87,7 +117,15 @@ export default defineComponent({
       :showRefresh="false"
     ></ListHeader>
     <div class="columns is-multiline is-variable">
-      <button>Start Battle?</button>
+      <button v-if="!showBattle" @click="startBattle">Start Battle?</button>
+      <div v-if="showBattle">
+        <HeroBattleCard :hero="selectedHero"></HeroBattleCard>
+        vs
+        <VillainBattleCard
+          :villain="selectedVillain"
+          :visible="true"
+        ></VillainBattleCard>
+      </div>
     </div>
   </div>
 </template>
