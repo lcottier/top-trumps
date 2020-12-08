@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "ms-vscode.azure-account",
+    "ms-azuretools.vscode-azurestaticwebapps",
+    "ms-azuretools.vscode-azurefunctions",
+  ]
+}
