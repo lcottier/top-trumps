@@ -60,19 +60,18 @@ export default defineComponent({
     });
 
     function startBattle() {
-      console.log('Hello');
       selectHero();
       selectVillain();
       state.showBattle = true;
     }
 
     function selectHero() {
-      const selectedIndex = 0;
+      const selectedIndex = Math.floor(Math.random() * state.heroes.length);
       state.selectedHero = state.heroes[selectedIndex];
     }
 
     function selectVillain() {
-      const selectedIndex = 0;
+      const selectedIndex = Math.floor(Math.random() * state.villains.length);
       state.selectedVillain = state.villains[selectedIndex];
     }
 
