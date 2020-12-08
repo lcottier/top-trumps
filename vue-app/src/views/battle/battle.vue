@@ -37,8 +37,8 @@ export default defineComponent({
     const state: ComponentState = reactive({
       errorMessage: '',
       message: '',
-      routePath: '/top-trumps',
-      title: 'Top Trumps',
+      routePath: '/battle',
+      title: 'Battle',
       villains: computed(() => store.getters.villains as Villain[]),
       heroes: computed(() => store.getters.heroes as Hero[]),
     });

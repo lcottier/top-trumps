@@ -14,7 +14,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="top-trump-card">
+  <div class="battle-card">
     <div class="content">
       <div class="name">{{ hero.name }}</div>
       <div class="description">{{ hero.description }}</div>
