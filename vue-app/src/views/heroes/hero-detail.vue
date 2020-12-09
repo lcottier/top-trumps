@@ -44,6 +44,9 @@ export default defineComponent({
           id: '',
           name: '',
           description: '',
+          speed: 0,
+          strength: 0,
+          intelligence: 0,
         };
         state.addMode = true;
       }

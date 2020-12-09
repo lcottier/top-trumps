@@ -18,14 +18,18 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="battle-card">
-    <div v-if="visible" class="villain-overlay">VILLAIN</div>
-    <div v-if="!visible" class="content">
-      <div class="name">{{ villain.name }}</div>
-      <div class="description">{{ villain.description }}</div>
-      <div class="description">Speed: {{ villain.speed }}</div>
-      <div class="description">Strength: {{ villain.strength }}</div>
-      <div class="description">Intelligence: {{ villain.intelligence }}</div>
+  <div class="battle-card" v-bind:class="{ 'is-flipped': !visible }">
+    <div v-bind:class="{ 'villain-overlay': visible }">
+      <div style="padding-top: 5px" v-if="visible">TOUR OF HEROES</div>
+    </div>
+    <div class="villain-card-content">
+      <div v-if="!visible">
+        <div class="name">{{ villain.name }}</div>
+        <div class="description">{{ villain.description }}</div>
+        <div class="description">Speed: {{ villain.speed }}</div>
+        <div class="description">Strength: {{ villain.strength }}</div>
+        <div class="description">Intelligence: {{ villain.intelligence }}</div>
+      </div>
     </div>
   </div>
 </template>

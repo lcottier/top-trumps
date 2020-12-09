@@ -21,6 +21,8 @@ interface ComponentState {
   selectedVillain: Villain | null;
   selectedHero: Hero | null;
   showBattle: boolean;
+  result: String;
+  hideVillain: boolean;
 }
 
 export default defineComponent({
@@ -51,6 +53,8 @@ export default defineComponent({
       selectedHero: null,
       selectedVillain: null,
       showBattle: false,
+      result: '',
+      hideVillain: true,
     });
 
     onMounted(async () => {
@@ -73,6 +77,29 @@ export default defineComponent({
     function selectVillain() {
       const selectedIndex = Math.floor(Math.random() * state.villains.length);
       state.selectedVillain = state.villains[selectedIndex];
+    }
+
+    function traitSelected(trait: string) {
+      battle(trait);
+    }
+
+    function battle(trait: string) {
+      if (state.selectedVillain && state.selectedHero) {
+        if (
+          state.selectedVillain[trait as keyof Villain] <
+          state.selectedHero[trait as keyof Hero]
+        ) {
+          state.result = 'Win';
+        } else if (
+          state.selectedVillain[trait as keyof Villain] >
+          state.selectedHero[trait as keyof Hero]
+        ) {
+          state.result = 'Lose';
+        } else {
+          state.result = 'Draw';
+        }
+        state.hideVillain = false;
+      }
     }
 
     async function getVillains() {
@@ -102,6 +129,7 @@ export default defineComponent({
       startBattle,
       selectHero,
       selectVillain,
+      traitSelected,
     };
   },
 });
@@ -118,11 +146,15 @@ export default defineComponent({
     <div class="columns is-multiline is-variable">
       <button v-if="!showBattle" @click="startBattle">Start Battle?</button>
       <div v-if="showBattle">
-        <HeroBattleCard :hero="selectedHero"></HeroBattleCard>
+        <HeroBattleCard
+          :hero="selectedHero"
+          v-on:trait-selected="traitSelected"
+        >
+        </HeroBattleCard>
         vs
         <VillainBattleCard
           :villain="selectedVillain"
-          :visible="true"
+          :visible="hideVillain"
         ></VillainBattleCard>
       </div>
     </div>
