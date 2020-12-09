@@ -79,8 +79,11 @@ header {
   }
 }
 
-.content {
+.hero-battle-content {
   position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 5px;
 }
 
 .content-title-group {
@@ -126,7 +129,6 @@ div.card-content {
 }
 
 .battle-card {
-  background: #fff;
   border-radius: 5px;
   display: inline-block;
   height: 300px;
@@ -136,6 +138,18 @@ div.card-content {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: transform 1s;
   transform-style: preserve-3d;
+}
+
+.result {
+  padding: 10px 0;
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .villain-overlay {
@@ -149,9 +163,6 @@ div.card-content {
 }
 
 .villain-card-content {
-  width: 100%;
-  height: 100%;
-  position: absolute;
   transform: rotateY( 180deg );
 }
 

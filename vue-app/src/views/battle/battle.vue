@@ -23,6 +23,7 @@ interface ComponentState {
   showBattle: boolean;
   result: String;
   hideVillain: boolean;
+  showResult: boolean;
 }
 
 export default defineComponent({
@@ -55,6 +56,7 @@ export default defineComponent({
       showBattle: false,
       result: '',
       hideVillain: true,
+      showResult: false,
     });
 
     onMounted(async () => {
@@ -67,6 +69,8 @@ export default defineComponent({
       selectHero();
       selectVillain();
       state.showBattle = true;
+      state.showResult = false;
+      state.hideVillain = true;
     }
 
     function selectHero() {
@@ -89,16 +93,17 @@ export default defineComponent({
           state.selectedVillain[trait as keyof Villain] <
           state.selectedHero[trait as keyof Hero]
         ) {
-          state.result = 'Win';
+          state.result = 'Congratulations you Win!';
         } else if (
           state.selectedVillain[trait as keyof Villain] >
           state.selectedHero[trait as keyof Hero]
         ) {
-          state.result = 'Lose';
+          state.result = 'Commiserations you Lost';
         } else {
-          state.result = 'Draw';
+          state.result = 'Unlucky its a Draw';
         }
         state.hideVillain = false;
+        state.showResult = true;
       }
     }
 
@@ -143,15 +148,18 @@ export default defineComponent({
       :showAdd="false"
       :showRefresh="false"
     ></ListHeader>
+    <button v-if="!showBattle" @click="startBattle">Start Battle?</button>
+    <div class="result" v-if="showResult">
+      {{ result }}
+      <button @click="startBattle()">Play Again?</button>
+    </div>
     <div class="columns is-multiline is-variable">
-      <button v-if="!showBattle" @click="startBattle">Start Battle?</button>
       <div v-if="showBattle">
         <HeroBattleCard
           :hero="selectedHero"
           v-on:trait-selected="traitSelected"
         >
         </HeroBattleCard>
-        vs
         <VillainBattleCard
           :villain="selectedVillain"
           :visible="hideVillain"

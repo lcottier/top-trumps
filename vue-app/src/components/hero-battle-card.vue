@@ -28,7 +28,7 @@ export default defineComponent({
 
 <template>
   <div class="battle-card">
-    <div class="content">
+    <div class="hero-battle-content">
       <div class="name">{{ hero.name }}</div>
       <div class="description">{{ hero.description }}</div>
       <div class="description" @click="selectTrait('speed')">
