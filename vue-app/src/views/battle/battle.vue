@@ -62,7 +62,6 @@ export default defineComponent({
     onMounted(async () => {
       getHeroes();
       getVillains();
-      console.log(state);
     });
 
     function startBattle() {
