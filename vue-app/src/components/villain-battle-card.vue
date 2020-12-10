@@ -25,9 +25,9 @@ export default defineComponent({
     <div class="card-face villain-card-content">
       <div class="name">{{ villain.name }}</div>
       <div class="description">{{ villain.description }}</div>
-      <div class="description">Speed: {{ villain.speed }}</div>
-      <div class="description">Strength: {{ villain.strength }}</div>
-      <div class="description">Intelligence: {{ villain.intelligence }}</div>
+      <div class="trait">Speed: {{ villain.speed }}</div>
+      <div class="trait">Strength: {{ villain.strength }}</div>
+      <div class="trait">Intelligence: {{ villain.intelligence }}</div>
     </div>
   </div>
 </template>

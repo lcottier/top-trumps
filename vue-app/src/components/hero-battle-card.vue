@@ -31,13 +31,13 @@ export default defineComponent({
     <div class="hero-battle-content">
       <div class="name">{{ hero.name }}</div>
       <div class="description">{{ hero.description }}</div>
-      <div class="description" @click="selectTrait('speed')">
+      <div class="trait" @click="selectTrait('speed')">
         Speed: {{ hero.speed }}
       </div>
-      <div class="description" @click="selectTrait('strength')">
+      <div class="trait" @click="selectTrait('strength')">
         Strength: {{ hero.strength }}
       </div>
-      <div class="description" @click="selectTrait('intelligence')">
+      <div class="trait" @click="selectTrait('intelligence')">
         Intelligence: {{ hero.intelligence }}
       </div>
     </div>
